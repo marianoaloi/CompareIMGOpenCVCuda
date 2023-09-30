@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8) # CMake install : https://cmake.org/download/
-project(TestThreadQT LANGUAGES CXX)
+project(CompareIMG LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_PREFIX_PATH "/opt/qt5/5.15.2/gcc_64") # Qt Kit Dir
 # set(CMAKE_AUTOUIC ON)

@@ -8,9 +8,15 @@
 // #include <ContentFile.cpp>
 // #include <ContentFile.h>
 #include <src/CreateImgsCompare.cpp>
+#include <src/CreateBaseImg.h>
 
 using namespace std;
 
+void manipulateImg(string &file1,string &file2,bool equal,vector<ContentFile> &content){
+    file1 = CreateBaseImg::findImg(file1);
+    file2 = CreateBaseImg::findImg(file2);
+    content.push_back(ContentFile(file1, file2,equal));
+}
 void splitMore(std::filesystem::path path,vector<string> row, vector<ContentFile> &content,bool equal)
 {
 
@@ -19,16 +25,13 @@ void splitMore(std::filesystem::path path,vector<string> row, vector<ContentFile
     {
         for (int j = i + 1; j < row.size(); j++)
         {
-            file1=path.string() + row[i];
-            file2=path.string() + row[j];
+            file1=path.string()+"/" + row[i];
+            file2=path.string()+"/" + row[j];
             manipulateImg(file1,file2,equal,content);
         }
     }
 }
 
-void manipulateImg(string &file1,string &file2,bool &equal,vector<ContentFile> &content){
-    content.push_back(ContentFile(file1, file2,equal));
-}
 
 void readFile(string filteStr,vector<ContentFile> &content,bool equal)
 {
@@ -37,7 +40,7 @@ void readFile(string filteStr,vector<ContentFile> &content,bool equal)
     string line, word , file1,file2;
     std::filesystem::path path = filteStr;
     path = path.parent_path();
-    path += "/img/";
+    path.append("img");
     while (getline(compareFile, line))
     {
         row.clear();
@@ -51,8 +54,8 @@ void readFile(string filteStr,vector<ContentFile> &content,bool equal)
         if (row.size() == 2)
         {
 
-            file1=path.string() + row[0];
-            file2=path.string() + row[1];
+            file1=path.string()+"/" + row[0];
+            file2=path.string()+"/" + row[1];
             manipulateImg(file1,file2,equal,content);
         }
         else
