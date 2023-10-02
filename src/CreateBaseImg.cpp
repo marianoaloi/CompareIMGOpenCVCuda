@@ -56,8 +56,8 @@ string CreateBaseImg::findImg(string pathStr)
     path = path.append(filename+".jpg");
     if (!filesystem::exists(path))
     {
-        saveDefaultFile(pathStr, path);
+        CreateBaseImg::saveDefaultFile(pathStr, path.string());
     }
 
-    return path;
+    return path.string();
 }
